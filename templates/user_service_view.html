@@ -1,0 +1,112 @@
+
+{% extends "user_layout.html" %}
+
+{% block content %}
+
+    <div class="container border mt-3 p-4 w-75" style="background-color: rgb(0, 208, 255);">
+        <h1 class="text-center">Provider Service Detail</h1>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-danger" role="alert">
+            {{message}}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        
+        {% for r in record %}
+        <div class="text-center">
+            <img class="img-thumbnail rounded-circle" style="height: 200px;" src="../static/provider/{{r[10]}}" alt="">
+        </div>
+        <!-- ---------today -->
+        <div class="row">
+            <div class="col text-center">
+                <span class="text-danger">Review:</span>
+                {if getStar %}
+                {% for i in range(getStar) %}
+                 <span class="fa fa-star text-warning"></span>
+                {% endfor %}
+                {% else %}
+                <span class="text-danger">no any review available!!</span>
+                {% endif %}
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col">
+                <label for="">First Name</label>
+                <div  class="form-control alert-secondary">{{r[0]}}</div>
+            </div>
+            <div class="col">
+                <label for="">Last Name</label>
+                <div  class="form-control alert-secondary">{{r[1]}}</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="">Email</label>
+                <div class="form-control alert-secondary">{{r[2]}}</div>
+            </div>
+        </div>
+        <div class="row">
+            
+            <div class="col">
+                <label for="">Mobile</label>
+                <div  class="form-control alert-secondary">{{r[3]}}</div>
+            </div>
+        </div>
+       
+        <div class="row">
+            <div class="col">
+                <label for="">State</label>
+                <div class="form-control alert-secondary">{{r[4]}}</div>
+            </div>
+            <div class="col">
+                <label for="">City</label>
+                <div class="form-control alert-secondary">{{r[5]}}</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="">Address</label>
+                <div  class="form-control alert-secondary">{{r[6]}}</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="">Skill</label>
+                <div  class="form-control alert-secondary">{{r[7]}}</div>
+            </div>
+            <div class="col">
+                <label for="">Experience</label>
+                <div  class="form-control alert-secondary">{{r[8]}}</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="">Charges</label>
+                <div  class="form-control alert-secondary">{{r[9]}}</div>
+            </div>
+        </div>
+        <form action="/user_service_book?providerEmail={{r[2]}}&charges={{r[9]}}" method="post">
+        <div class="row">
+            <div class="col">
+                <label for="">Choose Booking Date</label>
+                <input type="date" name="bookDate" class="form-control">
+            </div>
+        </div>
+        <div><button type="submit" class="btn btn-warning mt-2">Book Now</button></div>
+        </form>
+        {% endfor %}
+        
+        
+
+       
+ 
+    </div>
+
+  
+{% endblock %}

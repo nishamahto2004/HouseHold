@@ -1,0 +1,114 @@
+{% extends "user_layout.html" %}
+
+{% block content %}
+  
+    <div class="container border mt-3 p-4">
+        <h1>City / Skill Based Searching</h1>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-danger" role="alert">
+           {{message}}
+        </div>
+        {% endfor %}
+        {% endif %}
+       
+         
+        {% endwith %}
+        <form action="/user_service_city" method="post">
+        
+        <div class="row">
+                <div class="col">
+                    <label for="">State</label>
+                    <select class="form-select" onchange="print_city('city', this.selectedIndex);" id="sts" name="state"></select>
+                </div>
+                <div class="col">
+                    <label for="">City</label>
+                    <select id="city" name="city" class="form-select" id=""></select>
+                </div>
+            
+                <div class="col">
+                    <label for="">Skill</label>
+                    <select class="form-select" name="skill" id="">
+                        <option selected disabled>Select Your Skill</option>
+                        {% for r in sList %}
+                            <option>{{r[0]}}</option>
+                        {% endfor %}
+                    </select>
+
+                    <div class="col">
+                        <a href="/user_review?providerEmail={{r[5]}}">review</a>
+                    </div>
+                    <!-- <div class="col">
+                        {% if getStar %s}
+    
+                        {% for i in range(0,getStar) %}
+                        <span class="fa fa-star bg-warning"></span>
+                    
+                        {% endfor %}
+                        {% else %}
+                        <span class="text-danger">no review found</span>
+                        {% endif %}
+                        
+
+                    </div> -->
+                    
+                </div>
+                <div class="col">
+                    <button class="btn btn-primary mt-4" type="submit">Search</button>
+                </div>
+        </div>
+        </form>
+
+        <hr>
+    </div>
+    <!-- service provider list -->
+     <div class="container">
+        <div class="row">
+            {% if request.method=='POST' %}
+            {% if record %}
+            {% for r in record %}
+            <div class="col-md-4 p-4 m-2 border border-primary rounded shadow-lg">
+                <div class="row">
+                    <div class="col">
+                        <img class="img-thumbnail w-100" style="height: 200px;" src="../static/provider/{{r[0]}}"  alt="">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h5>{{r[1]}}</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h6>Mob: {{r[2]}}</h6>
+                    </div>
+                    <div class="col">
+                        <h6>Exp: {{r[3]}}</h6>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h6>Charges: {{r[4]}}</h6>
+                    </div>
+                    <div class="col">
+                        <a href="/user_service_view?providerEmail={{r[5]}}"><button class="btn btn-warning">view</button></a>
+                    </div>
+                </div>
+
+            </div>
+            {% endfor %}
+            {% else %}
+             <div class="alert alert-danger">
+                data not available
+             </div>
+            {% endif %}
+            {% endif %}
+        </div>
+     </div>
+      <!-- script files -->
+    <script src="../static/js/city.js"></script>
+    <script language="javascript">
+        print_state("sts");
+    </script>
+{% endblock %}

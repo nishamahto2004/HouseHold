@@ -1,0 +1,29 @@
+{% extends "provider_layout.html" %}
+
+{% block content %}
+
+    <h1>Review</h1>  
+            
+        {% if record %}
+        {% for r in record %}
+        <div class="container text-light bg-dark mt-2 p-2 shadow lg-rounded"></div>
+        <div class="row">
+            <div class="col text-primary">{{[r0]}}</div>
+            <div class="col">
+                {% for s in range(r[1]) %}
+                <span class="fa fa-star text-warning"></span>
+                {% endfor %}
+            </div>
+        </div>
+        <p>{{r[2]}}</p>
+        {% endfor %}
+        {% else %}
+
+        <p class="alert alert-danger">No review found!!!</p>
+        {% endif %}
+
+
+    </div>
+
+
+{% endblock %}

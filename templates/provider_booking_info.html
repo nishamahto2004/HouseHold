@@ -1,0 +1,40 @@
+{% extends "provider_layout.html" %}
+{% block content %}
+
+
+<table class="table table-dark table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">User Name</th>
+        <th scope="col">User Email</th>
+        <th scope="col">City</th>
+        <th scope="col">Mobile</th>
+        <th scope="col">Booking</th>
+        <th scope="col">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if record %}
+        {% for r in record %}
+        
+      <tr>
+        <th scope="row">1</th>
+        <td>{{r[0]}}</td>
+        <td>{{r[1]}}</td>
+        <td>{{r[2]}}</td>
+        <td>{{r[3]}}</td>
+        <td>{{r[4]}}</td>
+        <td>{{r[5]}}</td>
+      </tr>
+     {% endfor %}
+     {% else %}
+     <tr><td class="alert-danger">No booking found</td></tr>
+     {% endif %}
+     
+    </tbody>
+  </table>
+
+{% endblock %} 
+
+

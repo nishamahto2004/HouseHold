@@ -1,0 +1,83 @@
+{% extends "user_layout.html" %}
+
+{% block content %}
+  
+    <div class="container border mt-3 p-4">
+        <h1>Skill Based Searching</h1>
+       
+        <form action="/user_service" method="post">
+        
+        <div class="row">
+            <div class="col-6">
+                
+                <select class="form-select" name="skill" id="">
+                    <option selected disabled>Select Your Skill</option>
+                    {% for r in sList %}
+                        <option>{{r[0]}}</option>
+                    {% endfor %}
+                </select>
+                
+            </div>
+            <div class="col-4">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+            <div class="col-2">
+                <a href="/user_voice_search">voice search</a>
+            </div>
+        </div>
+        </form>
+
+        <hr>
+    </div>
+    <!-- service provider list -->
+     <div class="container">
+        <div class="row">
+        
+            {% for r in record %}
+            <div class="col-md-4 p-4 m-2 border border-primary rounded shadow-lg">
+                <div class="row">
+                    <div class="col">
+                        <img class="img img-thumbnail w-100" style="height: 200px;" src="../static/provider/{{r[0]}}" alt="">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h5>{{r[1]}}</h5>
+                    </div>
+                    <div class="col">
+                        <a href="/user_review?providerEmail={{r[5]}}">review</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h6>Mob: {{r[2]}}</h6>
+                    </div>
+                    <div class="col">
+                        <h6>Exp: {{r[3]}}</h6>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h6>Charges: {{r[4]}}</h6>
+                    </div>
+                    <div class="col">
+                        <a href="/user_service_view?providerEmail={{r[5]}}"><button class="btn btn-warning">view</button></a>
+                    </div>
+                </div>
+
+            </div>
+            {% endfor %}
+            
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-danger" role="alert">
+               {{message}}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+          
+        </div>
+     </div>
+{% endblock %}

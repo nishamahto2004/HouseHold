@@ -1,0 +1,70 @@
+
+{% extends "main_layout.html" %}
+
+{% block content %}
+
+    <div class="container border m-3 p-4 text-center">
+        <h1>User SignUp</h1>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-danger" role="alert">
+            {{message}}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <form action="/user_signup" method="post">
+        <div class="row">
+            <div class="col">
+                <label for="">First Name</label>
+                <input type="text" class="form-control" name="firstName">
+            </div>
+            <div class="col">
+                <label for="">Last Name</label>
+                <input type="text" class="form-control" name="lastName">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="">Email</label>
+                <input type="email" class="form-control" name="email">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="">Mobile</label>
+                <input type="text" class="form-control" name="mobile">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="">State</label>
+                <select class="form-select" onchange="print_city('city', this.selectedIndex);" id="sts" name="state"></select>
+            </div>
+            <div class="col">
+                <label for="">City</label>
+                <select id="city" name="city" class="form-select" id=""></select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="">Password</label>
+                <input type="password" class="form-control" name="password">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-primary mt-3" type="submit">SignUp Now</button>
+            </div>
+        </div>
+        </form>
+        <p class="mt-3">Already Registered? <a href="/user_login">Login Now</a></p>
+    </div>
+
+    <!-- script files -->
+    <script src="../static/js/city.js"></script>
+    <script language="javascript">
+        print_state("sts");
+    </script>
+{% endblock %}

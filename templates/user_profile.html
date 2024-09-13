@@ -1,0 +1,58 @@
+
+{% extends "user_layout.html" %}
+
+{% block content %}
+
+    <div class="container border mt-3 p-4 w-75">
+        <h1>Your Profile</h1>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-danger" role="alert">
+            {{message}}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <form action="/user_profile" method="post">
+            {% for r in record %}
+        <div class="row">
+            <div class="col">
+                <label for="">First Name</label>
+                <input type="text" class="form-control" name="firstName" value="{{r[0]}}">
+            </div>
+            <div class="col">
+                <label for="">Last Name</label>
+                <input type="text" class="form-control" name="lastName" value="{{r[1]}}">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col">
+                <label for="">Mobile</label>
+                <input type="text" class="form-control" name="mobile" value="{{r[2]}}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="">Email</label>
+                <div class="form-control alert-danger">{{r[3]}}</div>
+            </div>
+        </div>
+       
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-primary mt-3" type="submit">Update Now</button>
+            </div>
+        </div>
+        {% endfor %}
+        </form>
+        <div><a href="/user_delete"><button class="btn btn-danger mt-2">Account Delete</button></a></div>
+
+        <div class="mt-2"><a class="text-primary" href="/user_password_change">Change Password</a></div>
+
+        <div class="mt-2"><a class="text-danger" href="/user_logout">logout now</a></div>
+    </div>
+
+   
+{% endblock %}

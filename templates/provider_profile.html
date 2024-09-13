@@ -1,0 +1,103 @@
+
+{% extends "provider_layout.html" %}
+
+{% block content %}
+
+    <div class="container border mt-3 p-4 text-center">
+        <h1>Provider SignUp</h1>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-danger" role="alert">
+            {{message}}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <form action="/provider_profile" method="post">
+        {% for r in record %}
+            <div class="form-control alert-info">{{r[2]}}</div>
+            <div class="row">
+            <div class="col">
+                <label for="">First Name</label>
+                <input type="text" class="form-control" name="firstName" value="{{r[0]}}">
+            </div>
+            <div class="col">
+                <label for="">Last Name</label>
+                <input type="text" class="form-control" name="lastName" value="{{r[1]}}">
+            </div>
+        </div>
+        <div class="row">
+            
+            <div class="col">
+                <label for="">Mobile</label>
+                <input type="text" class="form-control" name="mobile" value="{{r[3]}}">
+            </div>
+        </div>
+       
+        <div class="row">
+            <div class="col">
+                <label for="">State</label>
+                <div class="form-control">{{r[4]}}</div>
+            </div>
+            <div class="col">
+                <label for="">City</label>
+                <div class="form-control">{{r[5]}}</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="">Address</label>
+                <input type="text" class="form-control" name="address" value="{{r[6]}}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="">Skill</label>
+                <select class="form-select" name="skill" id="">
+                    <option selected disabled>Select Your Skill</option>
+                    <option {% if (r[7]=='Electrician')  %} selected {% endif %}>Electrician</option>
+                    <option {% if (r[7]=='Plumber')  %} selected {% endif %}>Plumber</option>
+                    <option {% if (r[7]=='Cleaner')  %} selected {% endif %}>Cleaner</option>
+                    <option {% if (r[7]=='RO')  %} selected {% endif %}>RO</option>
+                    <option {% if (r[7]=='AC')  %} selected {% endif %}>AC</option>
+                    <option {% if (r[7]=='Gardener')  %} selected {% endif %}>Gardener</option>
+                    <option {% if (r[7]=='Painter')  %} selected {% endif %}>Painter</option>
+                    <option {% if (r[7]=='Carpenter')  %} selected {% endif %}>Carpenter</option>
+                    <option {% if (r[7]=='Car Wash')  %} selected {% endif %}>Car Wash</option>
+                </select>
+            </div>
+            <div class="col">
+                <label for="">Experience</label>
+                <input type="text" name="exp" class="form-control" value="{{r[8]}}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="">Charges</label>
+                <input type="text" name="charges" class="form-control" value="{{r[9]}}">
+            </div>
+        </div>
+       
+        
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-primary mt-3" type="submit">Update</button>
+            </div>
+        </div>
+        {% endfor %}
+        </form>
+        <div><a href="/provider_delete"><button class="btn btn-danger mt-2">Account Delete</button></a></div>
+
+        <div class="mt-2"><a class="text-primary" href="/provider_password_change">Change Password</a></div>
+
+        <div class="mt-2"><a class="text-danger" href="/provider_logout">logout now</a></div>
+ 
+    </div>
+
+    <!-- script files -->
+    <script src="../static/js/city.js"></script>
+    <script language="javascript">
+        print_state("sts");
+    </script>
+{% endblock %}
